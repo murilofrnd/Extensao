@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IA sem mistério: use com confiança e sem cair em golpes</title>
+<meta name="description" content="Guia simples sobre Inteligência Artificial: como funciona, riscos, golpes e um checklist de uso seguro.">
+<style>
+:root{--bg:#f6f7f9;--surface:#fff;--ink:#17202b;--muted:#566272;--line:#d9dee5;--blue:#2a5a9c;--red:#c73d3d;--amber:#e0a312;--green:#2a8a57;--focus:#2a5a9c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10161d;--surface:#18212b;--ink:#eaeff5;--muted:#a3afbd;--line:#2c3947;--blue:#7fb0f0;--red:#f07a7a;--amber:#f2c14e;--green:#5fcf94;--focus:#7fb0f0}}
+:root[data-theme="dark"]{--bg:#10161d;--surface:#18212b;--ink:#eaeff5;--muted:#a3afbd;--line:#2c3947;--blue:#7fb0f0;--red:#f07a7a;--amber:#f2c14e;--green:#5fcf94;--focus:#7fb0f0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:4.5rem}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:1.0625rem/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 .6rem}
+h1{font-size:clamp(2.4rem,8vw,3.8rem);letter-spacing:-.02em}
+h2{font-size:1.9rem;margin-top:0}
+h3{font-size:1.2rem}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:4px}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+nav{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:.25rem 1rem;flex-wrap:wrap;align-items:center;padding-top:.6rem;padding-bottom:.6rem}
+nav a{color:var(--ink);text-decoration:none;font-size:.95rem;padding:.25rem .1rem;border-bottom:2px solid transparent}
+nav a:hover{border-color:var(--blue)}
+nav b{font-family:Georgia,serif;margin-right:auto}
+section{padding:3.2rem 0;border-bottom:1px solid var(--line)}
+.hero{padding:3.5rem 0 3rem}
+.signal{display:flex;gap:.6rem;margin-bottom:1.4rem}
+.signal i{width:1.4rem;height:1.4rem;border-radius:50%;display:block}
+.signal i:nth-child(1){background:var(--red)}.signal i:nth-child(2){background:var(--amber)}.signal i:nth-child(3){background:var(--green)}
+.lead{font-size:1.25rem;color:var(--muted);max-width:34rem}
+.motto{font-family:Georgia,serif;font-size:1.3rem;margin:1.2rem 0 1.6rem}
+.btn{display:inline-block;background:var(--blue);color:#fff;border:0;border-radius:.5rem;padding:.8rem 1.3rem;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;margin:0 .5rem .6rem 0}
+.btn.alt{background:transparent;color:var(--blue);border:2px solid var(--blue)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn{color:#10161d}}
+.note{border-left:4px solid var(--amber);padding:.2rem 0 .2rem 1rem;margin:1.2rem 0;color:var(--muted)}
+details{border-top:1px solid var(--line);padding:.8rem 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:1rem}
+summary::after{content:"+";color:var(--blue);font-size:1.3rem;line-height:1}
+details[open] summary::after{content:"−"}
+details p{margin:.6rem 0 0;color:var(--muted)}
+ul.flags{padding-left:1.2rem}
+.quiz{background:var(--surface);border:1px solid var(--line);border-radius:.75rem;padding:1.4rem}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:1rem}
+.bar span{display:block;height:100%;background:var(--blue);width:0;transition:width .3s}
+.count{color:var(--muted);font-size:.9rem;margin:0 0 .4rem}
+.opts{display:grid;gap:.6rem;margin:1rem 0}
+.opt{text-align:left;background:var(--bg);color:var(--ink);border:2px solid var(--line);border-radius:.5rem;padding:.75rem 1rem;font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt.ok{border-color:var(--green);background:color-mix(in srgb,var(--green) 16%,var(--surface))}
+.opt.no{border-color:var(--red);background:color-mix(in srgb,var(--red) 14%,var(--surface))}
+.opt:disabled{cursor:default}
+.fb{min-height:1.5rem;margin:.4rem 0 1rem}
+.fb strong.ok{color:var(--green)}.fb strong.no{color:var(--red)}
+.score{font-family:Georgia,serif;font-size:2.6rem;margin:.2rem 0}
+.steps{list-style:none;padding:0;margin:1.2rem 0}
+.steps li{display:flex;gap:.9rem;align-items:flex-start;padding:.9rem 0;border-top:1px solid var(--line)}
+.steps input{width:1.4rem;height:1.4rem;margin-top:.25rem;accent-color:var(--green);flex:none}
+.steps label{cursor:pointer}
+.steps strong{display:block;font-family:Georgia,serif;font-size:1.2rem}
+.steps span{color:var(--muted)}
+footer{padding:2rem 0 3rem;color:var(--muted);font-size:.95rem}
+@media print{nav,.noprint,.hero,section:not(#checklist),footer{display:none!important}body{background:#424242;color:rgb(0, 0, 0)}.steps span{color:#f5f3f3}}
+</style>
+</head>
+<body>
+<nav aria-label="Principal"><div class="wrap">
+<b>IA sem mistério</b>
+<a href="#como">Como funciona</a><a href="#riscos">Riscos</a><a href="#quiz">Quiz</a><a href="#checklist">Checklist</a><a href="#sobre">Sobre</a>
+</div></nav>
+
+<main>
+<section class="hero" id="inicio"><div class="wrap">
+<div class="signal" aria-hidden="true"><i></i><i></i><i></i></div>
+<h1>IA sem mistério</h1>
+<p class="lead">A Inteligência Artificial já está no seu celular, nas redes sociais e nos golpes. Entenda como ela funciona e como se proteger, sem precisar saber de tecnologia.</p>
+<p class="motto">Pare. Desconfie. Confirme.</p>
+<a class="btn" href="#quiz">Fazer o quiz</a><a class="btn alt" href="#checklist" style="color:gray">Ver o checklist</a>
+</div></section>
+
+<section id="como"><div class="wrap">
+<h2>Como a IA funciona</h2>
+<p>A IA aprende padrões a partir de uma quantidade enorme de exemplos (textos, imagens, áudios). Depois, diante de uma pergunta nova, ela calcula qual resposta é a mais provável.</p>
+<p>Pense no corretor do teclado do celular, que sugere a próxima palavra. A IA generativa, como o ChatGPT, funciona de modo parecido, só que em uma escala muito maior.</p>
+<div class="note">A IA não entende o mundo como uma pessoa e não sabe separar verdade de mentira. Por isso ela pode errar com muita confiança.</div>
+<h3>Onde você já usa IA</h3>
+<p>Sugestões de vídeos e músicas, filtro de spam, assistentes de voz, tradução, mapas com trânsito em tempo real e atendimento por chatbot.</p>
+</div></section>
+
+<section id="riscos"><div class="wrap">
+<h2>Riscos e golpes</h2>
+<p>Toque em cada tópico para ver o que é e como se proteger.</p>
+<details><summary>Respostas inventadas (alucinações)</summary><p>A IA pode criar fatos, números e até fontes que parecem reais. Confira informações importantes em fontes confiáveis e abra os links que ela citar.</p></details>
+<details><summary>Preconceito nos resultados (viés)</summary><p>Se os dados usados no treinamento têm preconceitos, a IA pode repeti-los, por exemplo em seleção de currículos ou análise de crédito.</p></details>
+<details><summary>Fake news</summary><p>Textos, imagens e vídeos falsos são produzidos em escala e a baixo custo. Antes de compartilhar, procure a fonte original e outros veículos confiáveis.</p></details>
+<details><summary>Deepfakes e clonagem de voz</summary><p>Fotos, vídeos e áudios podem imitar uma pessoa real. Um áudio de um conhecido pedindo dinheiro com urgência pode ser falso: confirme por outro canal.</p></details>
+<details><summary>Golpes mais convincentes</summary><p>Mensagens sem erros de português, perfis falsos realistas e comprovantes forjados. Em vendas, confirme sempre o pagamento no aplicativo do seu banco, nunca só pelo comprovante.</p></details>
+<details><summary>Privacidade e dados pessoais</summary><p>O que você digita em uma ferramenta de IA pode ser armazenado. Não informe CPF, senhas, dados bancários ou informações de terceiros. A LGPD (Lei 13.709/2018) protege seus dados pessoais.</p></details>
+<h3 style="margin-top:1.6rem">Sinais de alerta</h3>
+<ul class="flags">
+<li>Pedido de dinheiro ou dados com urgência</li>
+<li>Número novo dizendo ser de alguém que você conhece</li>
+<li>Áudio com pausas ou tom estranho</li>
+<li>Imagem com mãos, textos ou iluminação esquisitos</li>
+<li>Promessa de ganho rápido e garantido</li>
+<li>Link desconhecido ou notícia sem fonte</li>
+</ul>
+</div></section>
+
+<section id="quiz"><div class="wrap">
+<h2>Teste seus conhecimentos</h2>
+<p>São situações do dia a dia. Você vê a explicação logo após cada resposta.</p>
+<div class="quiz" id="quizBox" aria-live="polite"></div>
+</div></section>
+
+<section id="checklist"><div class="wrap">
+<h2>Checklist de uso seguro</h2>
+<p>Marque conforme for praticando. Os 5 passos servem para qualquer mensagem, áudio ou notícia suspeita.</p>
+<ul class="steps">
+<li><input type="checkbox" id="s1"><label for="s1"><strong>Pare e pense</strong><span>Golpes dependem de pressa. Desconfie de urgência.</span></label></li>
+<li><input type="checkbox" id="s2"><label for="s2"><strong>Confirme por outro canal</strong><span>Ligue para o número que você já conhece antes de enviar dinheiro ou dados.</span></label></li>
+<li><input type="checkbox" id="s3"><label for="s3"><strong>Cheque a fonte</strong><span>Procure a notícia original e outros veículos confiáveis antes de compartilhar.</span></label></li>
+<li><input type="checkbox" id="s4"><label for="s4"><strong>Proteja seus dados</strong><span>Não digite CPF, senhas, dados bancários ou informações de terceiros em ferramentas de IA.</span></label></li>
+<li><input type="checkbox" id="s5"><label for="s5"><strong>Use a IA como apoio</strong><span>Revise e confira o que ela produz. A decisão final é sua.</span></label></li>
+</ul>
+<button class="btn noprint" type="button" onclick="window.print()">Imprimir checklist</button>
+</div></section>
+
+<section id="sobre"><div class="wrap">
+<h2>Sobre a ação</h2>
+<p>Este site faz parte de uma ação extensionista de conscientização sobre o uso consciente, seguro e ético da Inteligência Artificial, desenvolvida por <strong>Murilo</strong>, estudante de Engenharia de Software.</p>
+<p>Sua opinião ajuda a melhorar a ação.</p>
+<a class="btn alt" id="fbLink" href="#" target="_blank" rel="noopener" style="color:rgb(179, 0, 0)">Responder o feedback</a>
+<p style="color:var(--muted);font-size:.95rem">Fontes de apoio: <a href="https://cartilha.cert.br" target="_blank" rel="noopener">Cartilha CERT.br</a>, <a href="https://new.safernet.org.br" target="_blank" rel="noopener">SaferNet Brasil</a> e a <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener">LGPD</a>.</p>
+</div></section>
+</main>
+<footer><div class="wrap">Conteúdo educativo. Em caso de golpe, procure o seu banco e registre um boletim de ocorrência.</div></footer>
+
+<script>
+    //link de feedback do google formas
+const FEEDBACK_URL = "https://docs.google.com/forms/d/e/1FAIpQLScwmk6WtLbt-ELUmYaQkTxvy_Qu-BXPsj1dmoPf1BwJmO9sVA/viewform?usp=publish-editor";
+
+//Decide se o publico é de vendas
+const INCLUIR_PERGUNTA_VENDAS = true;
+
+document.getElementById("fbLink").href = FEEDBACK_URL;
+
+const perguntas = [
+ {q:"Chega uma mensagem: \"Oi, mãe, mudei de número, salva esse e me faz um PIX urgente\". O que fazer?",
+  o:["Salvar o número e fazer o PIX","Ligar para o número antigo ou outro familiar para confirmar","Pedir uma foto da pessoa"],c:1,
+  e:"Fotos e até a voz podem ser falsificadas. Confirmar por um canal que você já conhece é o que quebra o golpe."},
+ {q:"Qual destes é um sinal comum de imagem gerada por IA?",
+  o:["Resolução muito alta","Mãos ou dedos estranhos, textos ilegíveis, iluminação inconsistente","Muitas curtidas"],c:1,
+  e:"Esses detalhes ajudam, mas não são garantia: a IA melhora rápido. Na dúvida, confira a fonte."},
+ {q:"Você quer pedir à IA para melhorar um texto com dados de clientes. O que fazer?",
+  o:["Colar tudo como está","Remover nomes, CPF e dados sensíveis antes, ou usar uma ferramenta autorizada","Colar só metade"],c:1,
+  e:"O que você digita pode ser armazenado. Dados pessoais de terceiros exigem cuidado extra."},
+ {q:"A IA sempre indica fontes reais quando cita um estudo ou uma notícia.",
+  o:["Verdadeiro","Falso"],c:1,
+  e:"Ela pode inventar referências que parecem reais. Abra o link e confirme se a fonte existe."},
+ {q:"Você recebe no WhatsApp uma notícia chocante, sem fonte. Qual o primeiro passo?",
+  o:["Encaminhar para alertar os outros","Procurar o assunto em veículos confiáveis ou agências de checagem","Ignorar e apagar a conversa"],c:1,
+  e:"Compartilhar sem checar ajuda a espalhar desinformação, mesmo com boa intenção."},
+ {q:"Um site promete: \"Faça um PIX de R$ 50 e receba R$ 500 com nossa IA\". Isso é:",
+  o:["Uma oportunidade","Um golpe típico de promessa boa demais","Um investimento regulamentado"],c:1,
+  e:"Ganho garantido e rápido é o sinal clássico de fraude, com ou sem IA no meio."},
+ {q:"Qual afirmação sobre IA é verdadeira?",
+  o:["Entende o que diz como uma pessoa","Pode reproduzir preconceitos presentes nos dados de treinamento","Nunca erra em cálculos"],c:1,
+  e:"A IA aprende padrões dos dados. Se eles têm vieses, os resultados também podem ter."},
+ {q:"Uma empresa negou seu crédito por decisão automatizada e não explicou o motivo. Pela LGPD, você pode:",
+  o:["Nada, a decisão é final","Pedir informações sobre os critérios e solicitar a revisão da decisão","Só reclamar nas redes sociais"],c:1,
+  e:"A LGPD prevê o direito de solicitar a revisão de decisões tomadas apenas por tratamento automatizado."}
+];
+if (INCLUIR_PERGUNTA_VENDAS) perguntas.push(
+ {q:"Um comprador envia o comprovante de um PIX de entrada de um veículo. Antes de liberar o carro, você deve:",
+  o:["Confiar no comprovante","Confirmar no app do seu banco se o valor realmente entrou","Pedir outro comprovante"],c:1,
+  e:"Comprovantes podem ser forjados com edição ou IA. A confirmação no seu banco é a única prova."});
+
+const box = document.getElementById("quizBox");
+let i = 0, acertos = 0;
+
+function mostrar(){
+  const p = perguntas[i];
+  box.innerHTML = '<div class="bar"><span style="width:' + (i/perguntas.length*100) + '%"></span></div>' +
+    '<p class="count">Pergunta ' + (i+1) + ' de ' + perguntas.length + '</p>' +
+    '<h3></h3><div class="opts"></div><div class="fb"></div><button class="btn" type="button" id="prox" hidden></button>';
+  box.querySelector("h3").textContent = p.q;
+  const opts = box.querySelector(".opts");
+  p.o.forEach((t, k) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "opt"; b.textContent = t;
+    b.addEventListener("click", () => responder(k));
+    opts.appendChild(b);
+  });
+}
+
+function responder(k){
+  const p = perguntas[i], btns = box.querySelectorAll(".opt");
+  btns.forEach((b, n) => { b.disabled = true; if (n === p.c) b.classList.add("ok"); });
+  const certo = k === p.c;
+  if (certo) acertos++; else btns[k].classList.add("no");
+  const fb = box.querySelector(".fb");
+  fb.innerHTML = '<strong class="' + (certo ? "ok" : "no") + '">' + (certo ? "Correto. " : "Não foi dessa vez. ") + '</strong>';
+  fb.appendChild(document.createTextNode(p.e));
+  const prox = document.getElementById("prox");
+  prox.hidden = false;
+  prox.textContent = i < perguntas.length - 1 ? "Próxima pergunta" : "Ver resultado";
+  prox.addEventListener("click", () => { i++; i < perguntas.length ? mostrar() : resultado(); });
+  prox.focus();
+}
+
+function resultado(){
+  const n = perguntas.length, r = acertos / n;
+  const msg = r >= .75 ? "Você está bem preparado! Compartilhe o checklist com alguém."
+            : r >= .45 ? "Bom caminho! Revise a seção de riscos e golpes."
+            : "Vale reler o conteúdo. Comece pelos 5 passos do checklist.";
+  box.innerHTML = '<div class="bar"><span style="width:100%"></span></div>' +
+    '<p class="count">Resultado</p><p class="score">' + acertos + ' de ' + n + '</p><p></p>' +
+    '<a class="btn" href="#checklist">Ver o checklist</a>' +
+    '<button class="btn alt" type="button" id="again">Refazer o quiz</button>';
+  box.querySelector("p:nth-of-type(3)").textContent = msg;
+  document.getElementById("again").addEventListener("click", () => { i = 0; acertos = 0; mostrar(); });
+}
+mostrar();
+</script>
+</body>
+</html>
